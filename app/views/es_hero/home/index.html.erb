@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EsHero</title>
+
+    <meta charset="utf-8" />
+
+    <style>
+      body {
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 20px;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #333;
+        background-color: #333;
+      }
+
+      a, a:visited, a:active {
+        color: #428bca;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 20px;
+      }
+
+      th {
+        text-align: left;
+        border-bottom: solid 2px #ddd;
+      }
+
+      table td, table th {
+        padding: 8px;
+      }
+
+      td {
+        border-top: solid 1px #ddd;
+      }
+
+      .text-muted {
+        color: #999;
+      }
+
+      .container {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .alert {
+        padding: 12px 20px;
+        color: #fff;
+        background-color: #9c6;
+        margin-bottom: 20px;
+      }
+
+      .content {
+        padding: 20px 20px 1px 20px;
+        background-color: #eee;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin-top: 0;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      h1, p {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="alert">EsHero</div>
+      <div class="content">
+        <h1>Nodes</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Node</th>
+              <th style="width: 20%;">CPU</th>
+              <th style="width: 20%;">Connections</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @nodes.each do |node| %>
+              <tr>
+                <td><%= node[:name] %></td>
+                <td><%= node[:cpu] %>%</td>
+                <td><%= node[:connections] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="content">
+        <h1>Indices</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th style="width: 20%;">Documents</th>
+              <th style="width: 20%;">Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @indices.each do |index| %>
+              <tr>
+                <td><%= index[:name] %><br /><% if index[:aliases].any? %><span class="text-muted">aliased as <%= index[:aliases].join(", ") %></span><% else %>&nbsp;<% end %></td>
+                <td><%= number_with_delimiter(index[:docs]) %></td>
+                <td><%= number_to_human_size(index[:size]) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
