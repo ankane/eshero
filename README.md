@@ -2,8 +2,6 @@
 
 Elasticsearch insights made easy
 
-[View the demo](https://eshero.herokuapp.com/)
-
 ## Installation
 
 Add this line to your application’s Gemfile:
